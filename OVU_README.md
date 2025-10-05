@@ -73,8 +73,8 @@ SSH Key: ~/.ssh/ovu_key
 PostgreSQL:
   Superuser: postgres
   App User: ovu_user
-  Password: OvuDbUser2025Secure!Pass
-  Database: ulm_db
+  Password: Ovu123456!!@@##
+  Databases: ulm_db (8 tables), aam_db (4 tables)
   Port: 5432
 ```
 

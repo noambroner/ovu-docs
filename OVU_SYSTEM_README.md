@@ -37,9 +37,10 @@
 │  Server         │         │  Server         │         │  Server         │
 ├─────────────────┤         ├─────────────────┤         ├─────────────────┤
 │ • React Apps    │         │ • FastAPI       │         │ • PostgreSQL 17 │
-│ • Flutter Apps  │         │ • ULM API       │         │ • ulm_db        │
-│ • Nginx         │         │ • AAM API       │         │ • aam_db        │
-│ • HTTPS/SSL     │         │ • Supervisor    │         │ • Redis         │
+│ • Flutter Apps  │         │ • ULM API :8001 │         │ • ulm_db (8)    │
+│ • Nginx         │         │ • AAM API :8002 │         │ • aam_db (4)    │
+│ • HTTPS/SSL     │         │ • Python 3.11   │         │ • Redis         │
+│ • Git Repos     │         │ • Uvicorn       │         │ • (DB Only!)    │
 └─────────────────┘         └─────────────────┘         └─────────────────┘
    64.176.173.105            64.176.171.223              64.177.67.215
 ```
@@ -98,7 +99,9 @@ ssh -i ~/.ssh/ovu_key ploi@64.176.171.223
 
 **API Endpoints:**
 - ULM: http://64.176.171.223:8001/health
+- ULM Docs: http://64.176.171.223:8001/api/v1/docs
 - AAM: http://64.176.171.223:8002/health
+- AAM Architecture: Uses ULM API for authentication (microservice pattern)
 
 ### 3️⃣ Database Server
 ```
@@ -113,15 +116,18 @@ Services:
 - Redis
 
 Databases:
-- ulm_db (User Login Manager)
-- aam_db (Admin Area Manager)
+- ulm_db (User Login Manager) - 8 tables
+- aam_db (Admin Area Manager) - 4 tables
 
 DB User: ovu_user
-DB Password: [נשמר ב-.env בשרת Backend]
+DB Password: Ovu123456!!@@##
 
 Port:
 - 5432 (PostgreSQL)
 - 6379 (Redis)
+
+Note: אין Backend רץ בשרת זה!
+Backend רץ רק בשרת 64.176.171.223
 ```
 
 **התחברות SSH:**
@@ -628,4 +634,5 @@ sudo -u postgres psql -d ulm_db
 
 **🎉 המערכת מוכנה ל-production מבחינת infrastructure!**
 **🚧 נותר רק לחבר את Frontend ל-Backend ואז הכל יעבוד!**
+
 
